@@ -54,9 +54,9 @@ class Fontconfig(AutotoolsPackage):
         ldflags = []
         libs = []
         deps = []
-        if self.spec["bzip2"].satisfies("~shared"):
+        if not self.spec["freetype"].external and self.spec["bzip2"].satisfies("~shared"):
             deps.append("bzip2")
-        if not self.spec["libpng"].satisfies("libs=shared"):
+        if not self.spec["freetype"].external and not self.spec["libpng"].satisfies("libs=shared"):
             deps.append("libpng")
         if self.spec["libxml2"].satisfies("~shared"):
             deps.append("libxml-2.0")
