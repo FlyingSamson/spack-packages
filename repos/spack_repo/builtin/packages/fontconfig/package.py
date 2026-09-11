@@ -54,6 +54,8 @@ class Fontconfig(AutotoolsPackage):
         ldflags = []
         libs = []
         deps = []
+        # if freetype is an external, we can't access its DAG (bzip2 and libpng specs)
+        # we assume that the externals are shared libs
         if not self.spec["freetype"].external and self.spec["bzip2"].satisfies("~shared"):
             deps.append("bzip2")
         if not self.spec["freetype"].external and not self.spec["libpng"].satisfies("libs=shared"):
